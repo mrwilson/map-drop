@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<head>
+    <title>MapDrop</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+    <style type="text/css">
+        body {
+            display: grid;
+            grid-template-rows: 1fr 1fr 1fr 1fr;
+            grid-gap: 1.5em;
+            width: auto;
+            height: 100vh;
+            font-family: 'Luckiest Guy', cursive;
+        }
+
+        .box {
+            display: grid;
+            align-items: center;
+            justify-items: center;
+        }
+
+        header h1 {
+            font-size: 40pt
+        }
+
+        header span {
+            font-size: 25pt;
+        }
+
+        button {
+            width: 60%;
+            height: 60%;
+            font-size: 28pt;
+            font-family: inherit;
+            background-color: aliceblue;
+            border: solid darkgreen 5px;
+            border-radius: 40px;
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+
+        footer span a {
+            padding: 0 20px;
+            color: black;
+        }
+
+    </style>
+    <script type="text/javascript">
+        const pins = [];
+
+        function dropPin() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(recordPinDrop);
+            }
+        }
+
+        function recordPinDrop(location) {
+            pins.push({
+                time: new Date().toISOString(),
+                lat:  location.coords.latitude,
+                long: location.coords.longitude
+            });
+        }
+
+        function downloadPinDrops() {
+            let csvContent = "data:text/csv;charset=utf-8,time,lat,long\r\n";
+
+            pins.forEach(function(drop){
+                let row = Object.values(drop).join(",");
+                csvContent += row + "\r\n";
+            });
+
+            let encodedUri = encodeURI(csvContent);
+            let link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "mapdrop.csv");
+
+            document.body.appendChild(link);
+
+            link.click();
+        }
+    </script>
+</head>
+<body>
+    <header class="box">
+        <h1>Map <i class="fas fa-map-marker-alt"></i> Drop</h1>
+        <span>Drop pins and download locations</span>
+    </header>
+
+    <div id="drop" class="box">
+        <button id="pin-drop" onclick="dropPin()">
+            Drop a pin!
+        </button>
+    </div>
+
+    <div id="download" class="box">
+        <button id="download-drops" onclick="downloadPinDrops()">
+            Download!
+        </button>
+    </div>
+
+    <footer class="box">
+        <span>
+            <a href="https://github.com/mrwilson"><i class="fab fa-github fa-5x"></i></a>
+            <a href="https://twitter.com/pr0bablyfine"><i class="fab fa-twitter fa-5x"></i></a>
+        </span>
+    </footer>
+</body>
