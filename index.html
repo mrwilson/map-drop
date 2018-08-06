@@ -60,9 +60,20 @@
             color: black;
         }
 
+        #clear-pins {
+            color: darkred;
+        }
     </style>
     <script type="text/javascript">
-        const pins = [];
+        function addPin(newPin) {
+            let pins = getPins();
+            pins.push(newPin);
+            localStorage.setItem('map-drop', JSON.stringify(pins));
+        }
+
+        function getPins() {
+            return JSON.parse(localStorage.getItem('map-drop')) || [];
+        }
 
         function dropPin() {
             if (navigator.geolocation) {
@@ -74,7 +85,7 @@
         function recordPinDrop(location) {
             document.getElementById('pin-drop').removeAttribute('disabled');
 
-            pins.push({
+            addPin({
                 time:  new Date().toISOString(),
                 label: document.getElementById('pin-label').value,
                 lat:   location.coords.latitude,
@@ -85,7 +96,7 @@
         function downloadPinDrops() {
             let csvContent = "data:text/csv;charset=utf-8,time,label,lat,long\r\n";
 
-            pins.forEach(function(drop){
+            getPins().forEach(function(drop){
                 let row = Object.values(drop).join(",");
                 csvContent += row + "\r\n";
             });
@@ -98,6 +109,10 @@
             document.body.appendChild(link);
 
             link.click();
+        }
+
+        function clearPins() {
+            localStorage.removeItem('map-drop');
         }
     </script>
 </head>
@@ -120,6 +135,9 @@
     <div id="download" class="box">
         <button id="download-drops" onclick="downloadPinDrops()">
             Download!
+        </button>
+        <button id="clear-pins" onclick="clearPins()">
+            Delete all pins <i class="fas fa-trash-alt"></i>
         </button>
     </div>
 
