@@ -6,7 +6,7 @@ A tiny application to enable collection and export of locations on your device.
 
 MapDrop is a static site and runs entirely client-side - no data is synced anywhere else.
 
-<img src="mapdrop.png" height="500px"/>
+<img src="map-drop.png" height="500px"/>
 
 1. Add an optional label
 2. Drop a pin!
