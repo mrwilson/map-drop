@@ -112,7 +112,9 @@
         }
 
         function clearPins() {
-            localStorage.removeItem('map-drop');
+            if (confirm('Do you want to delete all your pins?')) {
+                localStorage.removeItem('map-drop');
+            }
         }
     </script>
 </head>
