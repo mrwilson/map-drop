@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>MapDrop</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+        integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+        integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+        crossorigin=""></script>
+
+        <link href="index.css" rel="stylesheet">
+        <script type="text/javascript" src="index.js"></script>
+    </head>
+    <body class="map">
+        <header class="box">
+            <h1>Map <i class="fas fa-map-marker-alt"></i> Drop</h1>
+            <span>Drop pins and download locations</span>
+        </header>
+
+        <div class="box">
+            <div id="map"></div>
+        </div>
+        <script type="text/javascript">
+            MapDrop.makeMap();
+        </script>
+        <footer class="box">
+            <span>
+            <a href="https://github.com/mrwilson/map-drop"><i class="fab fa-github fa-5x"></i></a>
+            <a href="https://twitter.com/pr0bablyfine"><i class="fab fa-twitter fa-5x"></i></a>
+            </span>
+        </footer>
+    </body>
+</html>
