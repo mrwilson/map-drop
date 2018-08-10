@@ -11,7 +11,7 @@ const MapDrop = {
 
     dropPin: function dropPin() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(recordPinDrop);
+            navigator.geolocation.getCurrentPosition(MapDrop.recordPinDrop);
             document.getElementById('pin-drop').setAttribute('disabled', 'true');
         }
     },
@@ -19,7 +19,7 @@ const MapDrop = {
     recordPinDrop: function recordPinDrop(location) {
         document.getElementById('pin-drop').removeAttribute('disabled');
 
-        addPin({
+        MapDrop.addPin({
             time:  new Date().toISOString(),
             label: document.getElementById('pin-label').value,
             lat:   location.coords.latitude,
@@ -30,7 +30,7 @@ const MapDrop = {
     downloadPinDrops: function downloadPinDrops() {
         let csvContent = "data:text/csv;charset=utf-8,time,label,lat,long\r\n";
 
-        getPins().forEach(function(drop){
+        MapDrop.getPins().forEach(function(drop){
             let row = Object.values(drop).join(",");
             csvContent += row + "\r\n";
         });
