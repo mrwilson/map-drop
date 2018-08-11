@@ -6,6 +6,40 @@ body {
     font-family: 'Luckiest Guy', cursive;
 }
 
+@media only screen and (min-width: 1025px) {
+    body {
+        grid-template-columns: 1fr 2fr 1fr;
+    }
+
+    body header h1 {
+        font-size: 30pt
+    }
+
+    body header i {
+        font-size: 2rem;
+    }
+
+    body header span {
+        font-size: 12pt
+    }
+
+    body header i {
+        font-size: 2rem;
+    }
+
+    body header h1 i {
+        font-size: 3rem;
+    }
+
+    header, #label, #drop, #map-container, footer {
+        grid-column: 2;
+    }
+
+    body footer button i {
+        font-size: 3rem;
+    }
+}
+
 .index {
     grid-template-rows: 1fr 1fr 2fr 1fr;
 }
@@ -34,6 +68,14 @@ header span {
 
 header a {
     color: black;
+}
+
+header h1 i {
+    font-size: 5rem;
+}
+
+header i {
+    font-size: 4rem;
 }
 
 button {
@@ -70,6 +112,10 @@ footer {
 
 footer a {
     color: black;
+}
+
+footer button i {
+    font-size: 8rem;
 }
 
 #clear-pins {
