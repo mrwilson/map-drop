@@ -1,6 +1,6 @@
 const MapDrop = {
     addPin: function addPin(newPin) {
-        let pins = getPins();
+        let pins = MapDrop.getPins();
         pins.push(newPin);
         localStorage.setItem('map-drop', JSON.stringify(pins));
     },
