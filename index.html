@@ -9,8 +9,19 @@
     </head>
     <body class="index">
         <header class="box">
-            <h1>Map <i class="fas fa-map-marker-alt"></i> Drop</h1>
-            <span>Drop pins and download locations</span>
+            <div>
+                <a href="https://github.com/mrwilson/map-drop"><i class="fab fa-github fa-5x"></i></a>
+            </div>
+
+            <div class="box">
+                <h1>Map <i class="fas fa-map-marker-alt"></i> Drop</h1>
+                <span>Drop pins and download locations</span>
+            </div>
+
+            <div>
+                <a href="https://twitter.com/pr0bablyfine"><i class="fab fa-twitter fa-5x"></i></a>
+            </div>
+
         </header>
 
         <div id="label" class="box">
@@ -23,20 +34,18 @@
             </button>
         </div>
 
-        <div id="download" class="box">
+        <footer class="box">
             <button id="download-drops" onclick="MapDrop.downloadPinDrops()">
-                Download!
+                <i class="fas fa-download fa-3x"></i>
+            </button>
+            <button id="goto-map">
+                <a href="/map.html">
+                    <i class="fas fa-map-marked-alt fa-3x"></i>
+                </a>
             </button>
             <button id="clear-pins" onclick="MapDrop.clearPins()">
-                Delete all pins <i class="fas fa-trash-alt"></i>
+                <i class="fas fa-trash-alt fa-3x"></i>
             </button>
-        </div>
-
-        <footer class="box">
-            <span>
-                <a href="https://github.com/mrwilson/map-drop"><i class="fab fa-github fa-5x"></i></a>
-                <a href="https://twitter.com/pr0bablyfine"><i class="fab fa-twitter fa-5x"></i></a>
-            </span>
         </footer>
     </body>
 </html>
