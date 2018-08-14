@@ -11,9 +11,21 @@ const MapDrop = {
 
     dropPin: function dropPin() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(MapDrop.recordPinDrop);
+            navigator.geolocation.getCurrentPosition(
+                MapDrop.recordPinDrop,
+                MapDrop.handleGeoError,
+                {
+                     timeout: 30000,
+                     enableHighAccuracy: true,
+                     maximumAge: 15000
+                }
+            );
             document.getElementById('pin-drop').setAttribute('disabled', 'true');
         }
+    },
+
+    handleGeoError: function handleGeoError(err) {
+        document.getElementById('pin-drop').removeAttribute('disabled');
     },
 
     recordPinDrop: function recordPinDrop(location) {
