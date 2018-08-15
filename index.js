@@ -1,48 +1,54 @@
-const MapDrop = {
-    addPin: function addPin(newPin) {
-        let pins = MapDrop.getPins();
+const MapDrop = new function() {
+    var lastLocation = {};
+
+    this.addPin = function addPin(newPin) {
+        let pins = this.getPins();
         pins.push(newPin);
         localStorage.setItem('map-drop', JSON.stringify(pins));
-    },
+    };
 
-    getPins: function getPins() {
+    this.getPins = function getPins() {
         return JSON.parse(localStorage.getItem('map-drop')) || [];
-    },
+    };
 
-    dropPin: function dropPin() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                MapDrop.recordPinDrop,
-                MapDrop.handleGeoError,
+    this.storeState = function storeState(location) {
+        document.getElementById('pin-drop').removeAttribute('disabled');
+        lastLocation = location;
+    };
+
+    this.setWatcher = function setWatcher() {
+        if(navigator.geolocation) {
+            document.getElementById('pin-drop').setAttribute('disabled', 'true');
+            navigator.geolocation.watchPosition(
+                this.storeState,
+                this.handleGeoError,
                 {
-                     timeout: 30000,
                      enableHighAccuracy: true,
-                     maximumAge: 15000
+                     maximumAge: 0
                 }
             );
-            document.getElementById('pin-drop').setAttribute('disabled', 'true');
         }
-    },
+    };
 
-    handleGeoError: function handleGeoError(err) {
-        document.getElementById('pin-drop').removeAttribute('disabled');
-    },
+    this.dropPin = function dropPin() {
+        this.recordPinDrop(lastLocation);
+    };
 
-    recordPinDrop: function recordPinDrop(location) {
-        document.getElementById('pin-drop').removeAttribute('disabled');
+    this.handleGeoError = function handleGeoError(err) {};
 
-        MapDrop.addPin({
+    this.recordPinDrop = function recordPinDrop(location) {
+        this.addPin({
             time:  new Date().toISOString(),
             label: document.getElementById('pin-label').value,
             lat:   location.coords.latitude,
             long:  location.coords.longitude
         });
-    },
+    };
 
-    downloadPinDrops: function downloadPinDrops() {
+    this.downloadPinDrops = function downloadPinDrops() {
         let csvContent = "data:text/csv;charset=utf-8,time,label,lat,long\r\n";
 
-        MapDrop.getPins().forEach(function(drop){
+        this.getPins().forEach(function(drop){
             let row = Object.values(drop).join(",");
             csvContent += row + "\r\n";
         });
@@ -55,15 +61,15 @@ const MapDrop = {
         document.body.appendChild(link);
 
         link.click();
-    },
+    };
 
-    clearPins: function clearPins() {
+    this.clearPins = function clearPins() {
         if (confirm('Do you want to delete all your pins?')) {
             localStorage.removeItem('map-drop');
         }
-    },
+    };
 
-    makeMap: function makeMap() {
+    this.makeMap = function makeMap() {
         navigator.geolocation.getCurrentPosition(function(location) {
             let map = L.map('map')
                 .setView([
@@ -88,5 +94,5 @@ const MapDrop = {
                 L.marker([pin.lat, pin.long]).addTo(map)
             });
         });
-    }
+    };
 };
