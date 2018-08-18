@@ -1,6 +1,7 @@
 const MapDrop = new function() {
     var lastLocation = {};
     var map = {};
+    var mapCenter = {};
 
     this.addPin = function addPin(newPin) {
         let pins = this.getPins();
@@ -16,6 +17,7 @@ const MapDrop = new function() {
         document.getElementById('pin-drop').removeAttribute('disabled');
 
         map.panTo(new L.LatLng(location.coords.latitude, location.coords.longitude));
+        mapCenter.setLatLng(new L.LatLng(location.coords.latitude, location.coords.longitude));
         lastLocation = location;
     };
 
@@ -106,8 +108,15 @@ const MapDrop = new function() {
                 accessToken: 'pk.eyJ1IjoicHJvYmFibHlmaW5lIiwiYSI6ImNqa2xlb2k0MDF1dnUza216eGtmbGZkMDkifQ.ku-vSD1pnkzHouNHR6s7Og'
             }).addTo(map);
 
+            mapCenter = L.circle([location.coords.latitude, location.coords.longitude], {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: 2
+            }).addTo(map);
+
             MapDrop.getPins().forEach(function(pin) {
-                this.makeMarker(pin).addTo(map)
+                MapDrop.makeMarker(pin).addTo(map)
             });
         });
     };
