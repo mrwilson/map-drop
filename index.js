@@ -40,12 +40,15 @@ const MapDrop = new function() {
     this.handleGeoError = function handleGeoError(err) {};
 
     this.recordPinDrop = function recordPinDrop(location) {
-        this.addPin({
+        let pin = {
             time:  new Date().toISOString(),
             label: document.getElementById('pin-label').value,
             lat:   location.coords.latitude,
             long:  location.coords.longitude
-        });
+        }
+
+        this.addPin(pin);
+        this.makeMarker(pin).addTo(map)
     };
 
     this.downloadPinDrops = function downloadPinDrops() {
@@ -72,6 +75,16 @@ const MapDrop = new function() {
         }
     };
 
+    this.makeMarker = function(pin) {
+        let marker = L.marker([pin.lat, pin.long]);
+
+        if (pin.label) {
+            marker = marker.bindTooltip(pin.label);
+        }
+
+        return marker;
+    };
+
     this.makeMap = function makeMap() {
         navigator.geolocation.getCurrentPosition(function(location) {
             map = L.map('map')
@@ -94,7 +107,7 @@ const MapDrop = new function() {
             }).addTo(map);
 
             MapDrop.getPins().forEach(function(pin) {
-                L.marker([pin.lat, pin.long]).addTo(map)
+                this.makeMarker(pin).addTo(map)
             });
         });
     };
