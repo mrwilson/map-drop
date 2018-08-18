@@ -4,6 +4,13 @@
         <title>MapDrop</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+              integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+              crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+                integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+                crossorigin=""></script>
+
         <link href="index.css" rel="stylesheet">
         <script type="text/javascript" src="index.js"></script>
     </head>
@@ -28,20 +35,16 @@
             <input id="pin-label" type="text" placeholder="Add a label?"/>
         </div>
 
-        <div id="drop" class="box">
-            <button id="pin-drop" onclick="MapDrop.dropPin()">
-                Drop a pin!
-            </button>
+        <div id="map-container" class="box">
+            <div id="map"></div>
         </div>
 
         <footer class="box">
             <button id="download-drops" onclick="MapDrop.downloadPinDrops()">
                 <i class="fas fa-download"></i>
             </button>
-            <button id="goto-map">
-                <a href="./map.html">
-                    <i class="fas fa-map-marked-alt"></i>
-                </a>
+            <button id="pin-drop" onclick="MapDrop.dropPin()">
+                <i class="fas fa-map-marker-alt"></i>
             </button>
             <button id="clear-pins" onclick="MapDrop.clearPins()">
                 <i class="fas fa-trash-alt"></i>
@@ -50,6 +53,7 @@
 
         <script type="text/javascript">
             MapDrop.setWatcher();
+            MapDrop.makeMap();
         </script>
     </body>
 </html>

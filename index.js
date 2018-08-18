@@ -1,5 +1,6 @@
 const MapDrop = new function() {
     var lastLocation = {};
+    var map = {};
 
     this.addPin = function addPin(newPin) {
         let pins = this.getPins();
@@ -13,6 +14,8 @@ const MapDrop = new function() {
 
     this.storeState = function storeState(location) {
         document.getElementById('pin-drop').removeAttribute('disabled');
+
+        map.panTo(new L.LatLng(location.coords.latitude, location.coords.longitude));
         lastLocation = location;
     };
 
@@ -71,11 +74,11 @@ const MapDrop = new function() {
 
     this.makeMap = function makeMap() {
         navigator.geolocation.getCurrentPosition(function(location) {
-            let map = L.map('map')
+            map = L.map('map')
                 .setView([
                     location.coords.latitude,
                     location.coords.longitude
-                ], 13);
+                ], 19);
 
             let attribution = [
                 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
@@ -85,7 +88,7 @@ const MapDrop = new function() {
 
             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                 attribution: attribution.join(", "),
-                maxZoom: 18,
+                maxZoom: 19,
                 id: 'mapbox.streets',
                 accessToken: 'pk.eyJ1IjoicHJvYmFibHlmaW5lIiwiYSI6ImNqa2xlb2k0MDF1dnUza216eGtmbGZkMDkifQ.ku-vSD1pnkzHouNHR6s7Og'
             }).addTo(map);

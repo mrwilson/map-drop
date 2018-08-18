@@ -1,6 +1,5 @@
 body {
     display: grid;
-    grid-gap: 1.5em;
     width: auto;
     height: 100vh;
     font-family: 'Luckiest Guy', cursive;
@@ -35,13 +34,17 @@ body {
         grid-column: 2;
     }
 
+    body input {
+        font-size: 14pt;
+    }
+
     body footer button i {
         font-size: 3rem;
     }
 }
 
 .index {
-    grid-template-rows: 1fr 1fr 2fr 1fr;
+    grid-template-rows: 1fr 0.5fr 3fr 1fr;
 }
 
 .map {
@@ -107,7 +110,7 @@ input {
 }
 
 footer {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1.5fr 1fr;
 }
 
 footer a {
@@ -115,7 +118,7 @@ footer a {
 }
 
 footer button i {
-    font-size: 8rem;
+    font-size: 6rem;
 }
 
 #clear-pins {
