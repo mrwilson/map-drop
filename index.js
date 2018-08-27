@@ -36,15 +36,17 @@ const MapDrop = new function() {
     };
 
     this.dropPin = function dropPin() {
-        this.recordPinDrop(lastLocation);
+        let label = prompt("Add a label?");
+
+        this.recordPinDrop(lastLocation, label);
     };
 
     this.handleGeoError = function handleGeoError(err) {};
 
-    this.recordPinDrop = function recordPinDrop(location) {
+    this.recordPinDrop = function recordPinDrop(location, label) {
         let pin = {
             time:  new Date().toISOString(),
-            label: document.getElementById('pin-label').value,
+            label: label,
             lat:   location.coords.latitude,
             long:  location.coords.longitude
         }
