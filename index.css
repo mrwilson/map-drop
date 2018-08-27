@@ -10,36 +10,8 @@ body {
         grid-template-columns: 1fr 2fr 1fr;
     }
 
-    body header h1 {
-        font-size: 30pt
-    }
-
-    body header i {
-        font-size: 2rem;
-    }
-
-    body header span {
-        font-size: 12pt
-    }
-
-    body header i {
-        font-size: 2rem;
-    }
-
-    body header h1 i {
-        font-size: 3rem;
-    }
-
     header, #label, #drop, #map-container, footer {
         grid-column: 2;
-    }
-
-    body input {
-        font-size: 14pt;
-    }
-
-    body footer button i {
-        font-size: 3rem;
     }
 }
 
@@ -62,11 +34,11 @@ header {
 }
 
 header h1 {
-    font-size: 50pt
+    font-size: 25pt
 }
 
 header span {
-    font-size: 20pt;
+    font-size: 12pt;
 }
 
 header a {
@@ -74,21 +46,21 @@ header a {
 }
 
 header h1 i {
-    font-size: 5rem;
+    font-size: 3rem;
 }
 
 header i {
-    font-size: 4rem;
+    font-size: 2rem;
 }
 
 button {
-    width: 60%;
-    height: 60%;
+    width: 6rem;
+    height: 6rem;
     font-size: 28pt;
     font-family: inherit;
     background-color: aliceblue;
-    border: solid darkgreen 5px;
-    border-radius: 40px;
+    border: solid darkgreen 3px;
+    border-radius: 50%;
 }
 
 button:disabled {
@@ -102,7 +74,7 @@ button:hover {
 input {
     width: 45%;
     height: 45%;
-    font-size: 28pt;
+    font-size: 14pt;
     text-align: center;
     border: solid darkgreen 2px;
     font-family: inherit;
@@ -118,7 +90,7 @@ footer a {
 }
 
 footer button i {
-    font-size: 6rem;
+    font-size: 3rem;
 }
 
 #clear-pins {
